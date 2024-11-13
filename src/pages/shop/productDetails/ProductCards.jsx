@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { RatingStars } from '../../../Components/RatingStars';
+//import { RatingStars } from '../../../Components/RatingStars';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../features/cart/cartSlice';
+import { addToCart } from '../../../redux/features/cart/cartSlice';
 
 const ProductCards = ({ products }) => {
     const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const ProductCards = ({ products }) => {
                         <p>
                             ${product.price} {product.oldPrice ? <s>${product.oldPrice}</s> : null}
                         </p>
-                        <RatingStars rating={product.rating} />
+                        {/*<RatingStars rating={product.rating} />*/}
                     </div>
                 </div>
             ))}

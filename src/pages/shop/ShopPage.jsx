@@ -1,10 +1,7 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
-
-import productsData from "../../data/products.json"
-import ProductCards from './ProductCards';
+import React, { useEffect, useState } from 'react';
+import ProductCards from './productDetails/ProductCards';
+import productsData from "../../data/products.json";
 import ShopFiltering from './ShopFiltering';
-// import { useFetchAllProductsQuery } from '../../redux/features/products/productsApi';
 
 const filters = {
     categories: ['all', 'accessories', 'dress', 'jewellery', 'cosmetics'],
@@ -17,82 +14,73 @@ const filters = {
     ]
 };
 
-
- const ShopPage = () => {
-     const [products, setProducts] = useState(productsData);
+const ShopPage = () => {
+    const [products, setProducts] = useState(productsData);
     const [filtersState, setFiltersState] = useState({
         category: 'all',
         color: 'all',
         priceRange: ''
     });
 
-    //filtering functions
     const applyFilters = () => {
         let filteredProducts = productsData;
 
-        // filter by category
-        if (filtersState.category && filtersState.category !=='all'){
-            filteredProducts = filteredProducts.filter(product => product.category === filtersState.category)
+        if (filtersState.category && filtersState.category !== 'all') {
+            filteredProducts = filteredProducts.filter(product => product.category === filtersState.category);
         }
 
-        // filter by colors
-        if (filtersState.color && filtersState.color !== 'all'){
-            filteredProducts = filteredProducts.filter(product => product.colors === filtersState.color)
+        if (filtersState.color && filtersState.color !== 'all') {
+            filteredProducts = filteredProducts.filter(product => product.colors === filtersState.color);
         }
 
-        // filter by price range
-        if (filtersState.priceRange){
+        if (filtersState.priceRange) {
             const [minPrice, maxPrice] = filtersState.priceRange.split('-').map(Number);
-            filteredProducts = filteredProducts.filter(product => product.price >= minPrice && product.price <= maxPrice)
+            filteredProducts = filteredProducts.filter(product => product.price >= minPrice && product.price <= maxPrice);
         }
 
-        setProducts(filteredProducts)
-    }
+        setProducts(filteredProducts);
+    };
 
     useEffect(() => {
         applyFilters();
-    },[filtersState])
-
-    // clear the filters
+    }, [filtersState]);
 
     const clearFilters = () => {
         setFiltersState({
             category: 'all',
             color: 'all',
             priceRange: ''
-        })
-    }
-
+        });
+    };
 
     return (
         <>
             <section className='section__container bg-primary-light'>
                 <h2 className='section__header capitalize'>Shop Page</h2>
-                <p className='section__subheader'>Discover the Hottest Picks: Elevate Your Style with Our Curated Collection of Trending Women s Fashion Products.</p>
+                <p className='section__subheader'>Discover the Hottest Picks: Elevate Your Style with Our Curated Collection of Trending Women's Fashion Products.</p>
             </section>
 
-             <section className='section__container'>
-                 <div className='flex flex-col md:flex-row md:gap-12 gap-8'>
-                     {/* left side */}
-                     <ShopFiltering
-                        filters={filters}
-                        filtersState={filtersState}
-                        setFiltersState={setFiltersState}
-                        clearFilters={clearFilters}
-                    />
+            <section className='section__container'>
+                <div className='flex flex-col md:flex-row md:gap-12 gap-8'>
+                    {/* Left Side - Filters */}
+                    <div className='w-full md:w-1/4'>
+                        <ShopFiltering
+                            filters={filters}
+                            filtersState={filtersState}
+                            setFiltersState={setFiltersState}
+                            clearFilters={clearFilters}
+                        />
                     </div>
 
-
-                     {/* right side */}
-                     <div>
+                    {/* Right Side - Products */}
+                    <div className='w-full md:w-3/4'>
                         <h3 className='text-xl font-medium mb-4'>Products Available: {products.length}</h3>
                         <ProductCards products={products} />
-                     </div>
+                    </div>
+                </div>
+            </section>
+        </>
+    );
+};
 
-             </section>
-
-         </>
-    )
- }
-
- export default ShopPage
+export default ShopPage;
