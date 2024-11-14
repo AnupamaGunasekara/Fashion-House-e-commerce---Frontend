@@ -1,6 +1,9 @@
-import React from 'react';
-import { createBrowserRouter, Route } from 'react-router-dom';
-import App from '../App';
+import {createBrowserRouter} from "react-router-dom";
+import App from "../App";
+import CategoryPage from "../pages/category/CategoryPage";
+import Search from "../pages/search/Search";
+import ShopPage from "../pages/shop/ShopPage";
+import SingleProduct from "../pages/shop/productDetails/SingleProduct";
 import Home from '../pages/home/Home';
 import Login from '../Components/Login';
 import Register from '../Components/Register';
@@ -48,4 +51,4 @@ const router = createBrowserRouter([
 
 ]);
 
-export default router;
+  export default router;
