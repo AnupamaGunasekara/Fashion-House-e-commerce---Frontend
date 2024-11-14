@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useLoginUserMutation } from '../redux/features/auth/authApi';
+import { setUser } from '../redux/features/auth/authSlice';
 
 const Login = () => {
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  
+  const dispatch = useDispatch();
+  const [loginUser,{isLoading:loginLoading}] = useLoginUserMutation();
+  const navigate = useNavigate();
+  
+  
+  //handle login
   const handleLogin = async (e) => {
     e.preventDefault();
     const data = {
@@ -13,7 +22,16 @@ const Login = () => {
       password,
     };
 
-    console.log(data);
+    try {
+      const response = await loginUser(data).unwrap();
+      //console.log(response);
+      const {token,user} = response;
+      dispatch(setUser({user}));
+      alert("login Successful");
+      navigate('/');
+    } catch (error) {
+      setMessage("Please provide valid emaial and password")
+    }
     // You can add login logic here, e.g., API call
   };
 
