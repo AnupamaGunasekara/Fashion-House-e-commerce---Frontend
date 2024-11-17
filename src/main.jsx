@@ -7,6 +7,7 @@ import router from './Routers/router.jsx'
 import 'remixicon/fonts/remixicon.css'
 import { Provider } from 'react-redux'
 import { store } from './redux/store.js'
+import React from 'react'
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>

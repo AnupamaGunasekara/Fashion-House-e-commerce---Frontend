@@ -8,6 +8,7 @@ import Home from '../pages/home/Home';
 import Login from '../Components/Login';
 import Register from '../Components/Register';
 import DashboardLayout from '../pages/Dashboard/DashboardLayout';
+import React from 'react'
 
 const router = createBrowserRouter([
   {
