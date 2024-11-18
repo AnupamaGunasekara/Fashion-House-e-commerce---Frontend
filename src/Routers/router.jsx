@@ -8,6 +8,7 @@ import Home from '../pages/home/Home';
 import Login from '../Components/Login';
 import Register from '../Components/Register';
 import DashboardLayout from '../pages/Dashboard/DashboardLayout';
+import PaymentSuccess from '../Components/PaymentSuccess';
 import React from 'react'
 
 const router = createBrowserRouter([
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
         { path: "/search", element: <Search /> },
         { path: "/shop", element: <ShopPage /> },
         { path: "/shop/:id", element: <SingleProduct /> },
-        { path: "/success", element: <div>When Payment Suceed!</div>} 
+        { path: "/success", element: <PaymentSuccess/>} 
     ],
   },
   {
