@@ -28,14 +28,13 @@ const ShopPage = () => {
     const {category,color,priceRange} = filtersState;
     const [minPrice, maxPrice] = priceRange.split("-").map(Number)
 
-    const {data:{products = [], totalPages, totalProducts} = {}, error, isLoading} = useFetchAllProductsQuery({
-        category : category !== 'all' ? category : '',
-        color: color !== 'all' ? color : '', 
-        minPrice: isNaN(minPrice) ?'' : minPrice,
-        maxPrice:isNaN(maxPrice) ? '' : maxPrice,
-         page: currentPage,
-         limit: ProductsPerPage,
-         
+    const { data: { products = [], totalPages, totalProducts } = {}, error, isLoading } = useFetchAllProductsQuery({
+        category: category !== 'all' ? category : '', // Send empty string when all is selected
+        color: color !== 'all' ? color : '',         // Send empty string when all is selected
+        minPrice: isNaN(minPrice) ? '' : minPrice,
+        maxPrice: isNaN(maxPrice) ? '' : maxPrice,
+        page: currentPage,
+        limit: ProductsPerPage,
     });
     console.log(products);
 
@@ -47,8 +46,19 @@ const ShopPage = () => {
             priceRange: ''
         });
     };
+// handle page change
+const handlePageChange = (pageNumber) => {
+    if(pageNumber>0 && pageNumber<=totalPages){
+        setCurrentPage(pageNumber);
+    }
+}
+
     if(isLoading) return<div>Loading...</div>
     if(error) return <div>Error loading products...</div>
+
+    const startProduct = (currentPage - 1)*ProductsPerPage + 1;
+    const endProduct = startProduct + products.length - 1;
+
 
     return (
         <>
@@ -71,8 +81,28 @@ const ShopPage = () => {
 
                     {/* Right Side - Products */}
                     <div className='w-full md:w-3/4'>
-                        <h3 className='text-xl font-medium mb-4'>Products Available: {products.length}</h3>
+                        <h3 className='text-xl font-medium mb-4'>Showing {startProduct} to {endProduct} of {totalProducts} products</h3>
                         <ProductCards products={products} />
+                        {/*pagination control*/}
+                        <div className='mt-6 flex justify-center'>
+                            <button 
+                            disabled={currentPage===1}
+                            onClick={()=>handlePageChange(currentPage - 1)}
+                            className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md mr-2'>Previous</button>
+                            {
+                                [...Array(totalPages)].map((_, index) => (
+                                    <button key={index}
+                                    onClick={()=>handlePageChange(index+1)}
+                                    className={`px-4 py-2 ${currentPage === index + 1? 'bg-blue-500 text-white':'bg-gray-300 text-gray-700'}
+                                    rounded-md mx-1`}
+                                    >{index + 1}</button>
+                                ))
+                            }
+                            <button
+                            disabled={currentPage===totalPages}
+                            onClick={()=>handlePageChange(currentPage+1)}
+                            className='px-4 py-2 bg-gray-300 text-gray-700 rounded-mdml-2'>Next</button>
+                        </div>
                     </div>
                 </div>
             </section>
