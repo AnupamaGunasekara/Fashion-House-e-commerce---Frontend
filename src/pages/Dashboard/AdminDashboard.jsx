@@ -1,30 +1,37 @@
-import React from 'react'
+import React from "react";
+import { useLogoutUserMutation } from "../../redux/features/auth/authApi";
+import { useDispatch } from "react-redux";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const navItems = [
-    { path: '/dashboard', label: 'Dashboard' },
-    { path: '/dashboard/orders', label: 'Order'  },
-    { path: '/dashboard/payments', label: 'Payments' },
-    { path: '/dashboard/profile', label: 'Profile'  },
-    { path: '/dashboard/reviews', label: 'Reviews'  },
+    { path: '/dashboard/admin', label: 'Admin Dashboard' },
+    { path: '/dashboard/add-new-post', label: 'ADD New Post'  },
+    { path: '/dashboard/manage-products', label: 'Manage Products' },
+    { path: '/dashboard/update-product/:id', label: 'Update Product'  },
+    { path: '/dashboard/users', label: 'All Users'  },
 ]
 
-const AdminDashboard = () => {
-    const [logoutUser] = useLogoutUserMutation();
-            const dispatch = useDispatch();
-            const navigate = useNavigate()
-    const handleLogout = async () => {
-        try {
-            await logoutUser().unwrap();
-            dispatch(logout())
-            alert('logged out sucessfully')
-            navigate('/')
-        }catch (error){
-            console.error("Failed to log out", error)
 
-        }
-    }
-  return (
-    <div className='space-y-5 bg-white p-8 md:h-screen flex flex-col justify-between'>
+const AdminDashboard = () =>{
+    
+    const [logoutUser] = useLogoutUserMutation();
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+const handleLogout = async () => {
+try {
+    await logoutUser().unwrap();
+    
+    alert('logged out sucessfully')
+    dispatch(logout())
+    navigate('/')
+}catch (error){
+    console.error("Failed to log out", error)
+
+}
+
+}
+    return(
+        <div className='space-y-5 bg-white p-8 md:h-screen flex flex-col justify-between'>
         <div>
             <div className='nav__logo'>
             <Link to="/">
@@ -36,8 +43,7 @@ const AdminDashboard = () => {
                 {
                     navItems.map((item)=>(
                         <li key={item.path}>
-                            <NavLink
-                            className={
+                            <NavLink className={
                                 ({isActive}) => isActive ? "text-blue-600 font-bold" : 'text-black'} 
                                 end
                             to={item.path}>
@@ -59,7 +65,7 @@ const AdminDashboard = () => {
         </div>
       
     </div>
-  )
+    )
 }
 
 export default AdminDashboard

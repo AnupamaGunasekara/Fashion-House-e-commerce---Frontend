@@ -15,7 +15,7 @@ const DashboardLayout = () => {
             
             return <AdminDashboard/>;
           case 'user': 
-            return <UserDashboard />;
+            return <UserDashboard/>;
         
           default:
             return <Navigate to="/login" replace/>;
@@ -23,7 +23,9 @@ const DashboardLayout = () => {
       }
   return (
     <div className='container mx-auto flex flex-col md:flex-row gap-4 items-start justify-start'>
-        <header className='lg:w-1/5 sm:w-2/5 w-full border'>Header</header>
+        <header className='lg:w-1/5 sm:w-2/5 w-full border'>
+        {renderDashboard()}
+        </header>
         <main className='p-8 bg-white w-full border mt-5'>
             <Outlet />
         </main>
