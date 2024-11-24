@@ -53,7 +53,7 @@ const Footer = () => {
                 <img src={instaImg4} alt="" />
                 <img src={instaImg5} alt="" />
                 <img src={instaImg6} alt="" />
-
+  
             </div>
         </div>
     </footer>
