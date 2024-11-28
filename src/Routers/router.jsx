@@ -10,6 +10,8 @@ import Register from '../Components/Register';
 import DashboardLayout from '../pages/Dashboard/DashboardLayout';
 import PaymentSuccess from '../Components/PaymentSuccess';
 import React from 'react'
+import PrivateRoute from "./PrivateRoute";
+import AdminDMain from "../pages/Dashboard/Admin/Dashboard/AdminDMain";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />, // TODO: user private routes here
+    element: <PrivateRoute><DashboardLayout/></PrivateRoute>, // TODO: user private routes here
     children: [
         // user routes
         { path: "", element: <div>User Dashboard</div> },
@@ -44,12 +46,12 @@ const router = createBrowserRouter([
         { path: "reviews", element: <div>User Reviews</div> },
 
         // admin routes (only accessible by admin) TODO: private routes with role field
-        { path: "admin", element: <div>Admin Main</div> },
-        { path: "add-new-post", element: <div>New Post</div> },
-        { path: "manage-products", element: <div>Manage Products</div> },
-        { path: "update-product/:id", element: <div>Update Product</div> },
-        { path: "users", element: <div>All Users</div> },
-        { path: "manage-orders", element: <div>Manage Orders</div> }
+        { path: "admin", element: <PrivateRoute role="admin"><AdminDMain/></PrivateRoute> },
+        { path: "add-new-post", element:<PrivateRoute role="admin"><div>New Post</div></PrivateRoute>  },
+        { path: "manage-products", element: <PrivateRoute role="admin"><div>Manage Products</div></PrivateRoute> },
+        { path: "update-product/:id", element:<PrivateRoute role="admin"><div>Update Product</div></PrivateRoute>},
+        { path: "users", element:<PrivateRoute role="admin"><div>All Users</div> </PrivateRoute> },
+        { path: "manage-orders", element:<PrivateRoute role="admin"><div>Manage Orders</div></PrivateRoute>}
     ]
 }
 
