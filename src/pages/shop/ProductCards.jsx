@@ -25,16 +25,17 @@ const ProductCards = ({ products }) => {
                             </Link>
                             <div className='hover:block absolute top-3 right-3'>
                                 <button onClick={(e) => {
-                                e.stopPropagation();
-                                handleAddToCart(product)}}>
+                                    e.stopPropagation();
+                                    handleAddToCart(product)
+                                }}>
                                     <i className='ri-shopping-cart-2-line bg-primary p-1.5 text-white hover:bg-primary-dark'></i>
                                 </button>
                             </div>
                         </div>
                         <div className='product__card__content'>
                             <h4>{product.name}</h4>
-                            <p>${product.price} {product?.oldPrice? <s>{product.oldPrice}</s>: null}</p>
-                            <RatingStars rating={product.rating}/>
+                            <p>${product.price} {product?.oldPrice ? <s>{product.oldPrice}</s> : null}</p>
+                            <RatingStars rating={product.rating} />
                         </div>
                     </div>
                 ))

@@ -4,7 +4,7 @@ import { getBaseUrl } from "../../../utils/baseURL";
 const statsApi = createApi({
   reducerPath: "statsApi", // Fixed reducerPath name
   baseQuery: fetchBaseQuery({
-    baseUrl: `${getBaseUrl}/api/stats`, // Fixed baseUrl syntax
+    baseUrl: `${getBaseUrl()}/api/stats`, // Fixed baseUrl syntax
     credentials: "include", // Fixed "credentials" spelling
   }),
   tagTypes: ["Stats"], // Fixed capitalization

@@ -13,7 +13,7 @@ import {
 } from "chart.js";
 import UserStats from "./UserStats"; 
 
-console.log(stats)
+//console.log(stats)
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -21,8 +21,26 @@ const UserDMain = () => {
   const { user } = useSelector((state) => state.auth);
   const { data: stats, error, isLoading } = useGetUserStatsQuery(user?.email);
 
-  if (isLoading) return <div className="text-center text-gray-500">Loading....</div>;
-  if (!stats) return <div className="text-center text-gray-500">No data available</div>;
+  if (!user?.email) {
+    return <div className="text-center text-gray-500">User email is required.</div>;
+  }
+
+  if (isLoading) {
+    console.log("Loading user stats...");
+    return <div className="text-center text-gray-500">Loading....</div>;
+  }
+
+  if (error) {
+    console.error("Error fetching user stats:", error);
+    return <div className="text-center text-gray-500">Error loading data</div>;
+  }
+
+  if (!stats) {
+    console.log("No stats available for the user.");
+    return <div className="text-center text-gray-500">No data available</div>;
+  }
+
+  console.log("User stats:", stats);
 
   const data = {
     labels: ["Total Payments", "Total Reviews", "Total Purchased Products"],
