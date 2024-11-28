@@ -19,8 +19,9 @@ const UserDashboard = () => {
     const handleLogout = async () => {
         try {
             await logoutUser().unwrap();
-            dispatch(logout())
+            
             alert('logged out sucessfully')
+            dispatch(logout())
             navigate('/')
         }catch (error){
             console.error("Failed to log out", error)
@@ -41,8 +42,7 @@ const UserDashboard = () => {
                 {
                     navItems.map((item)=>(
                         <li key={item.path}>
-                            <NavLink
-                            className={
+                            <NavLink className={
                                 ({isActive}) => isActive ? "text-blue-600 font-bold" : 'text-black'} 
                                 end
                             to={item.path}>

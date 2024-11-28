@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import CategoryPage from "../pages/category/CategoryPage";
 import Search from "../pages/search/Search";
@@ -11,6 +11,13 @@ import DashboardLayout from '../pages/Dashboard/DashboardLayout';
 import PaymentSuccess from '../Components/PaymentSuccess';
 import React from 'react'
 import PrivateRoute from "./PrivateRoute";
+import UserDMain from "../pages/Dashboard/user/dashboard/UserDMain";
+import UserOrders from "../pages/Dashboard/user/UserOrders";
+import OrderDetails from "../pages/Dashboard/user/OrderDetails";
+import UserPayments from "../pages/Dashboard/user/UserPayments";
+import UserReviews from "../pages/Dashboard/user/UserReviews";
+import UserProfile from "../pages/Dashboard/user/UserProfile";
+import PrivateRoute from "./PrivateRoute";
 import AdminDMain from "../pages/Dashboard/Admin/Dashboard/AdminDMain";
 
 const router = createBrowserRouter([
@@ -18,32 +25,36 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-        {path: '/',element: <Home/>},
-        {path: "/categories/:categoryName", element: <CategoryPage /> },
-        { path: "/search", element: <Search /> },
-        { path: "/shop", element: <ShopPage /> },
-        { path: "/shop/:id", element: <SingleProduct /> },
-        { path: "/success", element: <PaymentSuccess/>} 
+      { path: '/', element: <Home /> },
+      { path: "/categories/:categoryName", element: <CategoryPage /> },
+      { path: "/search", element: <Search /> },
+      { path: "/shop", element: <ShopPage /> },
+      { path: "/shop/:id", element: <SingleProduct /> },
+      { path: "/success", element: <PaymentSuccess /> },
+      {
+        path: "orders/:orderId",
+        element: <OrderDetails />
+      }
     ],
   },
   {
-      path: "/login",
-      element: <Login/>
+    path: "/login",
+    element: <Login />
   },
   {
     path: "/register",
-    element: <Register/> 
+    element: <Register />
   },
   {
     path: "/dashboard",
     element: <PrivateRoute><DashboardLayout/></PrivateRoute>, // TODO: user private routes here
     children: [
-        // user routes
-        { path: "", element: <div>User Dashboard</div> },
-        { path: "orders", element: <div>User Orders</div> },
-        { path: "payments", element: <div>User Payments</div> },
-        { path: "profile", element: <div>User Profile</div> },
-        { path: "reviews", element: <div>User Reviews</div> },
+      // user routes
+      { path: '', element: <UserDMain /> },
+      { path: "orders", element: <UserOrders /> },
+      { path: "payments", element: <UserPayments /> },
+      { path: "profile", element: <UserProfile /> },
+      { path: "reviews", element: <UserReviews /> },
 
         // admin routes (only accessible by admin) TODO: private routes with role field
         { path: "admin", element: <PrivateRoute role="admin"><AdminDMain/></PrivateRoute> },
@@ -53,8 +64,8 @@ const router = createBrowserRouter([
         { path: "users", element:<PrivateRoute role="admin"><div>All Users</div> </PrivateRoute> },
         { path: "manage-orders", element:<PrivateRoute role="admin"><div>Manage Orders</div></PrivateRoute>}
     ]
-}
+  }
 
 ]);
 
-  export default router;
+export default router;

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 
+
 const PrivateRoute = ({ children, role }) => {
     const { user } = useSelector((state) => state.auth);
     const location = useLocation();
@@ -11,7 +12,7 @@ const PrivateRoute = ({ children, role }) => {
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
-    if (role && user.role !== role) {
+     if (role && user.role !== role) {
         alert('You are not authorized to access this page!');
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
