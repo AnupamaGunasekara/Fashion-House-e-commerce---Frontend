@@ -25,7 +25,6 @@ const colors = [
 
 const AddProduct = () => {
     const { user } = useSelector((state) => state.auth);
-
     const [product, setProduct] = useState({
         name: '',
         category: '',
@@ -34,7 +33,6 @@ const AddProduct = () => {
         description: ''
     });
     const [image, setImage] = useState('');
-
     const [AddProduct, {isLoading, error}] = useAddProductMutation()
 
     const handleChange = (e) => {
@@ -53,7 +51,6 @@ const AddProduct = () => {
             alert('Please fill all the required fields');
             return;
         }
-
         try {
             await AddProduct({...product, image, author: user?._id}).unwrap();
             alert('Product added successfully');
@@ -109,6 +106,21 @@ const AddProduct = () => {
                 placeholder='Image'
                 setImage={setImage}
                 />
+                <div>
+                <label htmlFor="description" className='block text-sm font-medium text-gray-700'>Description</label>
+                <textarea name="description" id="description"
+                className='add-product-InputCSS'
+                value={product.description}
+                placeholder='Write a product description'
+                onChange={handleChange}
+                ></textarea>
+                </div>
+
+                <div>
+                    <button type='submit'
+                    className='add-product-btn'
+                    >Add Product</button>
+                </div>
 
         </form>
     </div>

@@ -7,7 +7,39 @@ const UploadImage = ({ name, setImage }) => {
     const [loading, setLoading] = useState(false);
     const [url, setUrl] = useState("");
 
-    
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
+
+    // request to upload a file
+    const uploadSingleImage = (base64) => {
+        setLoading(true);
+        axios
+            .post(`${getBaseUrl()}/uploadImage`, { image: base64 })
+            .then((res) => {
+                const imageUrl = res.data;
+                setUrl(imageUrl);
+                // console.log(imageUrl);
+                alert("Image uploaded successfully");
+                setImage(imageUrl); 
+            })
+            .then(() => setLoading(false))
+            .catch((error) => {
+                console.error(error);
+                setLoading(false);
+            });
+    };
 
     const uploadImage = async (event) => {
         const files = event.target.files;

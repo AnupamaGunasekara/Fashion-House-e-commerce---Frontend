@@ -20,6 +20,7 @@ import UserProfile from "../pages/Dashboard/user/UserProfile";
 
 import AdminDMain from "../pages/Dashboard/Admin/Dashboard/AdminDMain";
 import AddProduct from "../pages/Dashboard/Admin/addProduct/AddProduct";
+import ManageProduct from "../pages/Dashboard/Admin/manageProduct/ManageProduct";
 
 const router = createBrowserRouter([
   {
@@ -60,7 +61,7 @@ const router = createBrowserRouter([
         // admin routes (only accessible by admin) TODO: private routes with role field
         { path: "admin", element: <PrivateRoute role="admin"><AdminDMain/></PrivateRoute> },
         { path: "add-product", element:<PrivateRoute role="admin"><AddProduct/></PrivateRoute>  },
-        { path: "manage-products", element: <PrivateRoute role="admin"><div>Manage Products</div></PrivateRoute> },
+        { path: "manage-products", element: <PrivateRoute role="admin"><div><ManageProduct/></div></PrivateRoute> },
         { path: "update-product/:id", element:<PrivateRoute role="admin"><div>Update Product</div></PrivateRoute>},
         { path: "users", element:<PrivateRoute role="admin"><div>All Users</div> </PrivateRoute> },
         { path: "manage-orders", element:<PrivateRoute role="admin"><div>Manage Orders</div></PrivateRoute>}
