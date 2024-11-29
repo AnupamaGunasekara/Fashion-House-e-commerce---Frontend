@@ -6,6 +6,7 @@ import avatarImg from '../../../../src/assets/avatar.png'
 const UserProfile = () => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
+    console.log(user);
     const [editProfile, { isLoading, isError, error, isSuccess }] = useEditProfileMutation();
 
     const [formData, setformData] = useState({
@@ -23,7 +24,7 @@ const UserProfile = () => {
                 username: user?.username,
                 profileImage: user?.profileImage,
                 bio: user?.bio,
-                professional: user?.profession,
+                profession: user?.profession,
                 userId: user?._id
             })
         }
@@ -42,19 +43,32 @@ const UserProfile = () => {
             username: formData.username,
             profileImage: formData.profileImage,
             bio: formData.bio,
-            professional: formData.profession,
-            userId: formData._id
-        }
+            profession: formData.profession,
+            userId: formData.userId // Use the correct key for userId
+        };
+
         try {
             const response = await editProfile(updateUser).unwrap();
-            dispatch(setUser(response.user));
-            localStorage.setItem('user', JSON.stringify(response.user))
+
+            // Update local state with the response
+            setformData({
+                ...formData,
+                username: response.user?.username,
+                profileImage: response.user?.profileImage,
+                bio: response.user?.bio,
+                profession: response.user?.profession,
+            });
+
+            // Store updated user data in localStorage
+            localStorage.setItem('user', JSON.stringify(response.user));
+
+            alert("Profile updated successfully!");
         } catch (error) {
-            console.log("Failed to update profile", error);
-            alert("Failed to update profile. Please try again.")
+            console.error("Failed to update profile:", error);
+            alert("Failed to update profile. Please try again.");
         }
 
-        setIsModelOpen(false)
+        setIsModelOpen(false);
     }
     return (
         <div className="container mx-auto p-6">
