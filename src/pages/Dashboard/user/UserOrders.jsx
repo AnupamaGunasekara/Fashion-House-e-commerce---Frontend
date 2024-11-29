@@ -1,11 +1,14 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useGetOrdersByEmailQuery } from '../../../redux/features/orders/ordersApi'
+import { Link } from 'react-router-dom'
 
 const UserOrders = () => {
     const { user } = useSelector((state) => state.auth)
     const { data: orderdata, error, isLoading } = useGetOrdersByEmailQuery(user?.email);
     const orders = orderdata?.orders;
+    console.log(orderdata)
+    console.log(orders)
 
     if (isLoading) return <div>Loading...</div>
     if (error) return <div>No Orders Found</div>
@@ -92,83 +95,12 @@ const UserOrders = () => {
                                     ))
                                 }
 
-                                <tr>
-                                    <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                                        /argon/index.html
-                                    </th>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        3,985
-                                    </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        319
-                                    </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        <i className="fas fa-arrow-down text-orange-500 mr-4"></i>
-                                        46,53%
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                                        /argon/charts.html
-                                    </th>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        3,513
-                                    </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        294
-                                    </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        <i className="fas fa-arrow-down text-orange-500 mr-4"></i>
-                                        36,49%
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                                        /argon/tables.html
-                                    </th>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        2,050
-                                    </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        147
-                                    </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                                        50,87%
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                                        /argon/profile.html
-                                    </th>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        1,795
-                                    </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        190
-                                    </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        <i className="fas fa-arrow-down text-red-500 mr-4"></i>
-                                        46,53%
-                                    </td>
-                                </tr>
                             </tbody>
 
                         </table>
                     </div>
                 </div>
             </div>
-            <footer className="relative pt-8 pb-6 mt-16">
-                <div className="container mx-auto px-4">
-                    <div className="flex flex-wrap items-center md:justify-between justify-center">
-                        <div className="w-full md:w-6/12 px-4 mx-auto text-center">
-                            <div className="text-sm text-blueGray-500 font-semibold py-1">
-                                Made with <a href="https://www.creative-tim.com/product/notus-js" className="text-blueGray-500 hover:text-gray-800" target="_blank">Notus JS</a> by <a href="https://www.creative-tim.com" className="text-blueGray-500 hover:text-blueGray-800" target="_blank"> Creative Tim</a>.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </section>
     )
 }

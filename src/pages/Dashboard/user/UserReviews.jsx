@@ -10,7 +10,7 @@ const UserReviews = () => {
     if (isLoading) return <div>Loading ..</div>
     if (error) return <div>No Reviews Found!</div>
 
-    const reviews = Array.isArray(reviewsData) ? reviewsData : [];
+    const reviews = Array.isArray(reviewsData.reviews) ? reviewsData.reviews : [];
     const handleCardClick = () => {
         navigate('/shop')
     }

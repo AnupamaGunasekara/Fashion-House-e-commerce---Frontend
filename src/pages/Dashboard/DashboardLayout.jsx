@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
+import AdminDashboard from './AdminDashboard'
 import UserDashboard from './UserDashboard'
-import AdminDashboard from './AdminDashboard'
-import AdminDashboard from './AdminDashboard'
+
 
 const DashboardLayout = () => {
     const {user} = useSelector((state) => state.auth)

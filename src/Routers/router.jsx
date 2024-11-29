@@ -17,7 +17,7 @@ import OrderDetails from "../pages/Dashboard/user/OrderDetails";
 import UserPayments from "../pages/Dashboard/user/UserPayments";
 import UserReviews from "../pages/Dashboard/user/UserReviews";
 import UserProfile from "../pages/Dashboard/user/UserProfile";
-import PrivateRoute from "./PrivateRoute";
+
 import AdminDMain from "../pages/Dashboard/Admin/Dashboard/AdminDMain";
 
 const router = createBrowserRouter([

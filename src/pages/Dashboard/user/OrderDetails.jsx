@@ -1,22 +1,25 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useGetOrdersByIdQuery } from '../../../redux/features/orders/ordersApi';
 import { useParams } from 'react-router-dom';
 
 function OrderDetails() {
     const { user } = useSelector((state) => state.auth);
-    const { orderId } = useParams()
+    const { orderId } = useParams();
+    console.log(orderId);
     const { data: order, error, isLoading } = useGetOrdersByIdQuery(orderId);
+    console.log(order);
 
-    if (isLoading) return <div>Loading..</div>
-    if (error) return <div>No orders!</div>
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>No orders!</div>;
 
     const isCompleted = (status) => {
-        const statuses = ["pending", "processing", "Shipped", "Completed"];
-        return statuses.indexOf(status) < status.indexOf(order.status)
-    }
+        const statuses = ["pending", "processing", "shipped", "completed"];
+        return statuses.indexOf(order.status) >= statuses.indexOf(status);
+    };
 
     const isCurrent = (status) => order.status === status;
+
     const steps = [
         {
             status: 'pending',
@@ -47,16 +50,15 @@ function OrderDetails() {
     return (
         <section className="section__container rounded p-6">
             <h2 className="text-2xl font-semibold mb-4">
-                Payment {order?.status}
+                Payment Status: {order?.status}
             </h2>
             <p className="mb-4">Order Id: {order?.orderId}</p>
             <p className="mb-8">Status: {order?.status}</p>
             <ol className="sm:flex items-center relative">
-                {order.map((step, index) => (
+                {steps.map((step, index) => (
                     <TimelineStep
                         key={index}
                         step={step}
-                        order={order}
                         isCompleted={isCompleted(step.status)}
                         isCurrent={isCurrent(step.status)}
                         isLastStep={index === steps.length - 1}
@@ -66,7 +68,30 @@ function OrderDetails() {
                 ))}
             </ol>
         </section>
-    )
+    );
 }
 
-export default OrderDetails
+function TimelineStep({ step, isCompleted, isCurrent, isLastStep, icon, description }) {
+    return (
+        <li
+            className={`flex-1 flex items-center ${
+                isCompleted ? 'text-green-600' : isCurrent ? 'text-yellow-500' : 'text-gray-400'
+            }`}
+        >
+            <div
+                className={`rounded-full h-8 w-8 flex items-center justify-center ${
+                    isCompleted ? 'bg-green-600' : isCurrent ? 'bg-yellow-500' : 'bg-gray-400'
+                }`}
+            >
+                <i className={`icon-${icon.iconName}`}></i>
+            </div>
+            <div className="ml-4">
+                <h4 className="font-bold">{step.label}</h4>
+                <p className="text-sm">{description}</p>
+            </div>
+            {!isLastStep && <span className="flex-1 border-t border-gray-300"></span>}
+        </li>
+    );
+}
+
+export default OrderDetails;
