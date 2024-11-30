@@ -43,6 +43,9 @@ const UserReviews = () => {
                             <strong>Product ID:</strong> {review?.productId}
                         </p>
                         <p className='text-sm text-gray-500'>
+                            <strong>Product Name:</strong> {review?.productName}
+                        </p>
+                        <p className='text-sm text-gray-500'>
                             <strong>Date:</strong> {new Date(review?.createdAt).toLocaleString()}
                         </p>
                     </div>
