@@ -76,6 +76,12 @@ const Login = () => {
           </Link>{' '}
           here.
         </p>
+        <p className="my-5 italic text-sm text-center">
+          go to Home page{' '}
+          <Link to="/" className="text-red-700 px-1 underline">
+            Home
+          </Link>{' '}
+        </p>
       </div>
     </section>
   );

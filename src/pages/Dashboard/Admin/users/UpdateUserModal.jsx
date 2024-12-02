@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 const UpdateUserModal = ({ user, onClose, onRoleUpdate }) => {
     const [role, setRole] = useState(user.role);
 
-    const [updateUerRole] = useUpdateUerRoleMutation()
+    const [updateUerRole] = useUpdateUserRoleMutation()
     const handleUpdateRole = async () => {
         try {
             await updateUerRole({ userId: user?._id, role }).unwrap();

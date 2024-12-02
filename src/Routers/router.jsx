@@ -23,7 +23,7 @@ import AddProduct from "../pages/Dashboard/Admin/addProduct/AddProduct";
 import ManageProduct from "../pages/Dashboard/Admin/manageProduct/ManageProduct";
 import UpdateProduct from "../pages/Dashboard/Admin/manageProduct/UpdateProduct";
 import ManageUser from "../pages/Dashboard/Admin/users/ManageUser";
-import ManageOrder from "../pages/Dashboard/Admin/manageOrders.jsx/ManageOrder";
+import ManageOrders from "../pages/Dashboard/Admin/manageOrders/ManageOrder";
 
 const router = createBrowserRouter([
   {
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
         { path: "manage-products", element: <PrivateRoute role="admin"><div><ManageProduct/></div></PrivateRoute> },
         { path: "update-product/:id", element:<PrivateRoute role="admin"><div><UpdateProduct/></div></PrivateRoute>},
         { path: "users", element:<PrivateRoute role="admin"><ManageUser/></PrivateRoute> },
-        { path: "manage-orders", element:<PrivateRoute role="admin"><ManageOrder/></PrivateRoute>}
+        { path: "manage-orders", element:<PrivateRoute role="admin"><ManageOrders/></PrivateRoute>}
     ]
   }
 

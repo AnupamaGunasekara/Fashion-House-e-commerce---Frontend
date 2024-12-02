@@ -3,6 +3,9 @@ import { useDeleteOrderMutation, useGetAllOrdersQuery } from '../../../../redux/
 import { formatDate } from '../../../../utils/formatDate'
 import { Link } from 'react-router-dom'
 import UpdateOrderModal from './UpdateOrderModal'
+import { useState } from 'react';
+import Footer from '../../../../Components/Footer';
+
 
 const ManageOrders = () => {
     const { data: orders, error, isLoading, refetch } = useGetAllOrdersQuery();
@@ -59,7 +62,7 @@ const ManageOrders = () => {
                                 </td>
                                 <td className='py-3 px-4 border-b'>{formatDate(order?.updatedAt)}</td>
                                 <td className='py-3 px-4 border-b flex items-center space-x-4'>
-                                    <Link to='#' className="text-blue-500 hover:underline">View</Link>
+                                    <Link to={`/orders/${order?._id}`} className="text-blue-500 hover:underline">View</Link>
                                     <button className="text-green-500 hover:underline" onClick={() => handleEditOrder(order)}>Edit</button>
                                     <button className="text-red-500 hover:underline" onClick={() => handleDeleteOder(order?._id)}>Delete</button>
                                 </td>
@@ -80,6 +83,7 @@ const ManageOrders = () => {
                 )
             }
         </div>
+        
     )
 }
 
