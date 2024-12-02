@@ -1,12 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import RatingStars from '../../Components/RatingStars';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/features/cart/cartSlice';
 
 const ProductCards = ({ products }) => {
-    //console.log(products)
+    
     const dispatch = useDispatch();
 
     const handleAddToCart = (product) => {
@@ -43,21 +42,7 @@ const ProductCards = ({ products }) => {
         </div>
     )
 }
-ProductCards.propTypes = {
-    products: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-            category: PropTypes.string.isRequired,
-            description: PropTypes.string,
-            price: PropTypes.number.isRequired,
-            oldPrice: PropTypes.number,
-            image: PropTypes.string.isRequired,
-            color: PropTypes.string,
-            rating: PropTypes.number,
-        })
-    ).isRequired,
-};
+
 
 
 export default ProductCards
