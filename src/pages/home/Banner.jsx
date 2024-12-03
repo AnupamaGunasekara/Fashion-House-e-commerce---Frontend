@@ -15,7 +15,7 @@ const Banner = () => {
                 <button className='btn'><Link to='/shop'>EXPLORE NOW</Link></button>
             </div>
             <div className='header__image'>
-                <img src={bannerImg} alt="banner img" />
+                <img src={bannerImg} alt="banner img"style={{ width: '100%', maxWidth: '450px', height: 'auto' }} />
             </div>
 
         </div>
