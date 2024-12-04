@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const ShopFiltering = ({filters, filtersState, setFiltersState, clearFilters}) => {
   return (
