@@ -7,7 +7,8 @@ const AdminStats = ({stats})=> {
         <div className='grid gap-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 grid-cols-1'>
             <div className='bg-white shadow-mdrounded-lg p-6 border border-gray-200 hover:scale-105 transition-all duration-200 cursor-pointer'>
                 <h2 className='text-xl font-semibold mb-2'>Total Earnings</h2>
-                <p className='text-2xl font-bold'>{stats?.totalEarnings}</p>
+                <p className='text-2xl font-bold'>{stats?.totalEarnings?.toFixed(2)}</p>
+
             </div>
 
             <div className='bg-white shadow-mdrounded-lg p-6 border border-gray-200 hover:scale-105 transition-all duration-200 cursor-pointer'>
