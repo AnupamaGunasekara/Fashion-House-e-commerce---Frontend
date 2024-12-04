@@ -24,6 +24,9 @@ import ManageProduct from "../pages/Dashboard/Admin/manageProduct/ManageProduct"
 import UpdateProduct from "../pages/Dashboard/Admin/manageProduct/UpdateProduct";
 import ManageUser from "../pages/Dashboard/Admin/users/ManageUser";
 import ManageOrders from "../pages/Dashboard/Admin/manageOrders/ManageOrder";
+import AboutUs from "../Components/AboutUs";
+import TermsAndConditions from "../Components/TermsAndConditions";
+import TrackingOrderPage from "../Components/TrackingOrderPage";
 
 const router = createBrowserRouter([
   {
@@ -34,8 +37,12 @@ const router = createBrowserRouter([
       { path: "/categories/:categoryName", element: <CategoryPage /> },
       { path: "/search", element: <Search /> },
       { path: "/shop", element: <ShopPage /> },
+      { path: "/aboutUs", element: <AboutUs /> },
       { path: "/shop/:id", element: <SingleProduct /> },
-      { path: "/success", element: <PaymentSuccess /> },
+      { path: "/success", element: <PaymentSuccess /> }, 
+      { path: "/termsandconditions", element: <TermsAndConditions /> }, 
+      { path: "/trackingorderpage", element: <TrackingOrderPage /> }, 
+
       {
         path: "orders/:orderId",
         element: <OrderDetails />
