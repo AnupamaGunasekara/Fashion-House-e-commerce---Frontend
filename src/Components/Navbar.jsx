@@ -47,8 +47,8 @@ const dropdownMenus = user?.role ==='admin'? [...adminDropDownMenus]:[...userDro
 const handleLogout = async () => {
   try {
       await logoutUser().unwrap();
-      dispatch(logout())
-      navigate('/')
+      dispatch(logout());
+      navigate('/');
   } catch (error) {
       console.error("Failed to log out", error)
   }
@@ -59,7 +59,7 @@ const handleLogout = async () => {
         <ul className="nav__links">
           <li className="link"><Link to="/">Home</Link></li>
           <li className="link"><Link to="/shop">Shop</Link></li>
-          <li className="link"><Link to="/">Pages</Link></li>
+          <li className="link"><Link to="/aboutUs">About Us</Link></li>
           <li className="link"><Link to="/contact">Contact</Link></li>
         </ul>
 
@@ -77,7 +77,7 @@ const handleLogout = async () => {
           </span>
 
           <span>
-            <button onClick={handleCartToggle} className="hover:text-primary">
+            <button aria-label="shopingBag" onClick={handleCartToggle} className="hover:text-primary">
               <i className="ri-shopping-bag-line"></i>
               <sup className="text-sm inline-block px-1.5 text-white rounded-full bg-primary text-center">{products.length}</sup>
             </button>
@@ -87,6 +87,7 @@ const handleLogout = async () => {
             {
               user && user? (<>
               <img 
+              role='img'
               onClick={handleDropDownToggle}
               src={user?.profileImage || avatarImg} alt="" className='size-6 rounded-full cursor-pointer'/>
               {
@@ -105,7 +106,7 @@ const handleLogout = async () => {
                   </div>
                 )
               }
-              </>) : (<Link to="/login">
+              </>) : (<Link to="/login" aria-label="Login">
                 <i className="ri-user-line"></i>
               </Link>)
             }

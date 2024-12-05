@@ -10,6 +10,7 @@ const navItems = [
     { path: '/dashboard/manage-products', label: 'Manage Product'},
     { path: '/dashboard/users', label: 'Users'  },
     { path: '/dashboard/manage-orders', label: 'Manage Orders'  },
+    { path: '/dashboard/messages', label: 'messages'  },
 ]
 
 function AdminDashboard() {

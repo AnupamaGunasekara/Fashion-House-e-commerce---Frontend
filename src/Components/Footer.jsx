@@ -6,6 +6,7 @@ import instaImg4 from "../assets/instagram-4.jpg"
 import instaImg5 from "../assets/instagram-5.jpg"
 import instaImg6 from "../assets/instagram-6.jpg"
 
+
 const Footer = () => {
   return (
     <>
@@ -29,19 +30,17 @@ const Footer = () => {
         <div className='footer__col'>
             <h4>COMPANY</h4>
             <a href="/">Home</a>
-            <a href="/">About Us</a>
-            <a href="/">Work with us</a>
-            <a href="/">Our Blogs</a>
-            <a href="/">Terms and conditions</a>
+            <a href="/aboutus">About Us</a>
+            <a href="/contact">Work with us</a>
+            <a href="/termsandconditions">Terms and conditions</a>
         </div>
 
         <div className='footer__col'>
             <h4>USEFUL LINK</h4>
-            <a href="/">Help</a>
-            <a href="/">Track your Order</a>
-            <a href="/">Men</a>
-            <a href="/">Women</a>
-            <a href="/">Dresses</a>
+            <a href="/trackingorderpage">Track your Order</a>
+            <a href="/categories/accessories">Assoseries</a>
+            <a href="/shop">Women</a>
+            <a href="/categories/dress">Dresses</a>
         </div>
 
         <div className='footer__col'>
@@ -53,7 +52,7 @@ const Footer = () => {
                 <img src={instaImg4} alt="" />
                 <img src={instaImg5} alt="" />
                 <img src={instaImg6} alt="" />
-
+  
             </div>
         </div>
     </footer>

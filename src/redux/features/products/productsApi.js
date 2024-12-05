@@ -22,7 +22,7 @@ const productsApi = createApi({
           category: category || "",
           color: color || "",
           minPrice: minPrice || 0,
-          maxPrice: maxPrice || " ",
+          maxPrice: maxPrice || "",
           page: page.toString(),
           limit: limit.toString(),
         }).toString();
