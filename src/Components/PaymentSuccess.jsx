@@ -4,11 +4,12 @@ import TimelineSteps from './TimelineSteps';
 
 const PaymentSuccess = () => {
     const [order, setOrder] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
         const sessionId = query.get('session_id');
-        console.log("session Id "+sessionId);
+        console.log("session Id: " + sessionId);
 
         if (sessionId) {
             fetch(`${getBaseUrl()}/api/orders/confirm-payment`, {
@@ -16,60 +17,72 @@ const PaymentSuccess = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({session_id: sessionId }),
+                body: JSON.stringify({ session_id: sessionId }),
             })
-                .then((res) => res.json())
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error('Failed to confirm payment');
+                    }
+                    return res.json();
+                })
                 .then((data) => setOrder(data.order))
-                .catch((err) =>
-                    console.error("Error confirming payment", err)
-                );
+                .catch((err) => {
+                    console.error("Error confirming payment", err);
+                    setError(err.message);
+                });
         }
     }, []);
-    console.log(order);
-    if(!order) {return <div>Loading....</div>}
 
-    const isCompleted = (status)=>{
-        const statuses = ["pending", "processing", "Shipped", "Completed"];
-        return statuses.indexOf(status) < status.indexOf(order.status)
-    }
+    const isCompleted = (status) => {
+        const statuses = ["pending", "processing", "shipped", "completed"];
+        return statuses.indexOf(status) < statuses.indexOf(order.status);
+    };
 
-    const isCurrent = (status)  => order.status === status;
+    const isCurrent = (status) => order.status === status;
+
     const steps = [
         {
-          status: 'pending',
-          label: 'Pending',
-          description: 'Your order has been created and is awaiting processing.',
-          icon: { iconName: 'time-line', bgColor: 'red-500', textColor: 'gray-800' },
+            status: 'pending',
+            label: 'Pending',
+            description: 'Your order has been created and is awaiting processing.',
+            icon: { iconName: 'time-line', bgColor: 'red-500', textColor: 'gray-800' },
         },
         {
-          status: 'processing',
-          label: 'Processing',
-          description: 'Your order is currently being processed.',
-          icon: { iconName: 'loader-line', bgColor: 'yellow-800', textColor: 'yellow-800' },
+            status: 'processing',
+            label: 'Processing',
+            description: 'Your order is currently being processed.',
+            icon: { iconName: 'loader-line', bgColor: 'yellow-800', textColor: 'yellow-800' },
         },
         {
-          status: 'shipped',
-          label: 'Shipped',
-          description: 'Your order has been shipped.',
-          icon: { iconName: 'truck-line', bgColor: 'blue-800', textColor: 'blue-800' },
+            status: 'shipped',
+            label: 'Shipped',
+            description: 'Your order has been shipped.',
+            icon: { iconName: 'truck-line', bgColor: 'blue-800', textColor: 'blue-800' },
         },
         {
-          status: 'completed',
-          label: 'Completed',
-          description: 'Your order has been successfully completed.',
-          icon: { iconName: 'check-line', bgColor: 'green-800', textColor: 'green-900' },
+            status: 'completed',
+            label: 'Completed',
+            description: 'Your order has been successfully completed.',
+            icon: { iconName: 'check-line', bgColor: 'green-800', textColor: 'green-900' },
         },
-      ];
+    ];
 
+    if (error) {
+        return <div >Error: {error}</div>;
+    }
 
-      return (
-        <section className="section__container rounded p-6">
+    if (!order) {
+        return <div data-testid="loading-message">Loading...</div>;
+    }
+
+    return (
+        <section className="section__container rounded p-6" data-testid="payment-success">
             <h2 className="text-2xl font-semibold mb-4">
                 Payment {order?.status}
             </h2>
             <p className="mb-4">Order Id: {order?.orderId}</p>
             <p className="mb-8">Status: {order?.status}</p>
-            <ol className="sm:flex items-center relative">
+            <ol className="sm:flex items-center relative" data-testid="timeline-steps">
                 {steps.map((step, index) => (
                     <TimelineSteps
                         key={index}
@@ -85,7 +98,6 @@ const PaymentSuccess = () => {
             </ol>
         </section>
     );
-    
 };
 
 export default PaymentSuccess;

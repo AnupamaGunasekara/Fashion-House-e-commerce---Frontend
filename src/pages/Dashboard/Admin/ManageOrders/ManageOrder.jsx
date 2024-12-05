@@ -4,7 +4,7 @@ import { formatDate } from '../../../../utils/formatDate'
 import { Link } from 'react-router-dom'
 import UpdateOrderModal from './UpdateOrderModal'
 import { useState } from 'react';
-import Footer from '../../../../Components/Footer';
+
 
 
 const ManageOrders = () => {
