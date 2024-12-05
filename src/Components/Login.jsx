@@ -17,6 +17,10 @@ const Login = () => {
   //handle login
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      setMessage("Email and password are required");
+      return;
+    }
     const data = {
       email,
       password,
@@ -24,15 +28,13 @@ const Login = () => {
 
     try {
       const response = await loginUser(data).unwrap();
-      //console.log(response);
       const {token,user} = response;
       dispatch(setUser({user}));
       alert("login Successful");
       navigate('/');
     } catch (error) {
-      setMessage("Please provide valid emaial and password")
+      setMessage("Please provide valid email and password")
     }
-    // You can add login logic here, e.g., API call
   };
 
   return (
