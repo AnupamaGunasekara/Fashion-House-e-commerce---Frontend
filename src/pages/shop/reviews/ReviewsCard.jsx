@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import commentorIcon from '../../../assets/avatar.png'
 import { formatDate } from '../../../utils/formatDate'
 import RatingStars from '../../../Components/RatingStars'
-import PostAReview from './postAReview'
+import PostAReview from './PostAReview'
 
 const ReviewsCard = ({productReviews}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
